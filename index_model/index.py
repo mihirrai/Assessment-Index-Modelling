@@ -69,7 +69,7 @@ class IndexModel:
         for date in filter(lambda x: x <= pd.to_datetime(end_date), self.index_values_df.index[1:]):
             previous_business_day = self._get_previous_business_day(date)
 
-            # Get data for previous and current business day to add 1 (change from 0.xxx to 1.xxx)
+            # Get data for previous and current business day to get % change in prices and add 1 (change from 0.xxx to 1.xxx)
             pct_change_df = self.stock_prices_df[pd.to_datetime(previous_business_day): pd.to_datetime(date)][
                                 self.top_stock_tickers].pct_change().dropna() + 1
             pct_change = pct_change_df.values.flatten().tolist()
